@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifas Trebol</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #008405; /* Color verde */
+            --secondary-color: #000;
+            --accent-color: #f1c40f; /* Dorado para premios */
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section / Banner */
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.postimg.cc/rwxky4Jg/Screenshot-20251121-165705-Google.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Lista de Ofertas */
+        .offers-list {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .offer-item {
+            border-bottom: 1px solid #333;
+            padding: 10px 0;
+            font-weight: bold;
+        }
+        .offer-item:last-child { border-bottom: none; }
+        .offer-highlight { color: var(--accent-color); }
+
+        /* Premios */
+        .prizes-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* Buscador de Boletos */
+        .ticket-selector {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid var(--primary-color);
+            text-align: center;
+        }
+
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .ticket-btn {
+            border: 1px solid #ccc;
+            background: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .ticket-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .ticket-btn.selected {
+            background-color: var(--secondary-color);
+            color: var(--accent-color);
+            border-color: var(--secondary-color);
+        }
+
+        .ticket-btn.sold {
+            background-color: #e9ecef;
+            color: #adb5bd;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        /* Botón Flotante WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            line-height: 60px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            text-decoration: none;
+        }
+        /* Estilo para los botones de la máquina de la suerte */
+        .lucky-options button {
+            margin: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-ticket-alt"></i> ☘️RIFAS TREBOL☘️</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pagosss.html">Métodos de Pago</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Verificar Boletos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="badge bg-success mb-3">¡PÁGINA VERIFICADA!</div>
+            <h1 class="main-title">BILLETIZA 100,000 PESOS</h1>
+            <h3>5 DE DICIEMBRE 2025</h3>
+            <p class="lead">¡Participa y ganate 100,000 pesotes!</p>
+            <a href="#boletos" class="btn btn-lg btn-danger mt-3">COMPRAR BOLETOS AHORA</a>
+        </div>
+    </section>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-6">
+                
+                <div class="offers-list text-center">
+                    <h4 class="mb-3" style="color: var(--accent-color);">🔥 OPORTUNIDADES 🔥</h4>
+                    <div class="offer-item">🎫1 BOLETO <span class="offer-highlight">$2</span></div>
+                    <div class="offer-item">🎫2 BOLETOS <span class="offer-highlight">$4</span></div>
+                    <div class="offer-item">🎫3 BOLETOS <span class="offer-highlight">$6</span></div>
+                    <div class="offer-item">🎫4 BOLETOS <span class="offer-highlight">$8</span></div>
+                    <div class="offer-item">🎫5 BOLETOS <span class="offer-highlight">$10</span></div>
+                </div>
+
+                <div class="prizes-section">
+    <h3 class="text-danger text-center mb-4">🏆 LISTA DE PREMIOS</h3>
+    
+    <div class="card mb-3">
+        <img src="https://i.postimg.cc/dVkxJKqJ/Screenshot-20251122-110305-Cap-Cut.jpg" class="card-img-top" alt="Premio 1">
+        <div class="card-body">
+            <h5 class="card-title">💵 PREMIO: 100,000 pesos</h5>
+        </div>
+    
+</div>
+
+                    <div class="alert alert-info mt-3 text-center">
+                        <small>Sorteo con Triss Clasico el 5 de diciembre 2025/ 60,000 EMISIONES</small>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6" id="boletos">
+                <div class="ticket-selector">
+                    <h3 class="mb-3">🎫 ELIGE TUS NÚMEROS</h3>
+                    <p class="text-muted">Haz clic en los números que desees apartar.</p>
+                    
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Buscar número..." id="searchTicket">
+                        <button class="btn btn-outline-secondary" type="button">Buscar</button>
+                    </div>
+
+                    <div class="mb-3 lucky-options">
+                        <p class="fw-bold mb-1">🍀 Máquina de la Suerte (Selección Rápida):</p>
+                        <button class="btn btn-sm btn-dark" onclick="seleccionarAleatorio(3)">3 Boletos</button>
+                        <button class="btn btn-sm btn-dark" onclick="seleccionarAleatorio(5)">5 Boletos</button>
+                        <button class="btn btn-sm btn-dark" onclick="seleccionarAleatorio(10)">10 Boletos</button>
+                        <button class="btn btn-sm btn-dark" onclick="seleccionarAleatorio(20)">20 Boletos</button>
+                        <button class="btn btn-sm btn-dark" onclick="seleccionarAleatorio(50)">50 Boletos</button>
+                        <button class="btn btn-sm btn-dark" onclick="seleccionarAleatorio(100)">100 Boletos</button>
+                    </div>
+
+                    <div class="ticket-grid" id="ticketContainer">
+                        </div>
+
+                    <div id="purchaseForm" class="mt-4 text-start" style="display:none; border-top: 1px solid #eee; padding-top: 20px;">
+                        <h5>Resumen de tu Reserva</h5>
+                        <p>Boletos seleccionados: <span id="selectedCount">0</span></p>
+                        <div class="mb-3">
+                            <label class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" placeholder="Tu nombre" id="inputNombre">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">WhatsApp</label>
+                            <input type="tel" class="form-control" placeholder="Ej: 5216621234567" id="inputWhatsapp">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Estado</label>
+                            <select class="form-select" id="inputEstado">
+                                <option value="" disabled selected>Selecciona tu Estado</option>
+                                <option>Aguascalientes</option>
+                                <option>Baja California</option>
+                                <option>Baja California Sur</option>
+                                <option>Campeche</option>
+                                <option>Chiapas</option>
+                                <option>Chihuahua</option>
+                                <option>Ciudad de México</option>
+                                <option>Coahuila</option>
+                                <option>Colima</option>
+                                <option>Durango</option>
+                                <option>Guanajuato</option>
+                                <option>Guerrero</option>
+                                <option>Hidalgo</option>
+                                <option>Jalisco</option>
+                                <option>México</option>
+                                <option>Michoacán</option>
+                                <option>Morelos</option>
+                                <option>Nayarit</option>
+                                <option>Nuevo León</option>
+                                <option>Oaxaca</option>
+                                <option>Puebla</option>
+                                <option>Querétaro</option>
+                                <option>Quintana Roo</option>
+                                <option>San Luis Potosí</option>
+                                <option>Sinaloa</option>
+                                <option>Sonora</option>
+                                <option>Tabasco</option>
+                                <option>Tamaulipas</option>
+                                <option>Tlaxcala</option>
+                                <option>Veracruz</option>
+                                <option>Yucatán</option>
+                                <option>Zacatecas</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-success w-100 btn-lg" id="btnApartar" onclick="enviarWhatsApp()">APARTAR BOLETOS</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center p-4 mt-5">
+        <p>&copy; 2025 Sorteos Trebol. Todos los derechos reservados.</p>
+        <small>Sitio desarrollado con tecnología Lotto Digital</small>
+    </footer>
+
+    <a href="https://wa.me/526622988931" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // --- CONFIGURACIÓN ---
+    const NUMERO_WHATSAPP = '525667578626'; // Tu número de WhatsApp completo (525667578626)
+    const PRECIO_BOLETO = 2; // El precio de cada boleto es $2
+    const totalTickets = 60000;
+    
+    // --- ELEMENTOS DEL DOM ---
+    const ticketContainer = document.getElementById('ticketContainer');
+    const purchaseForm = document.getElementById('purchaseForm');
+    const selectedCountSpan = document.getElementById('selectedCount');
+    const inputNombre = document.getElementById('inputNombre');
+    const inputWhatsapp = document.getElementById('inputWhatsapp');
+    const inputEstado = document.getElementById('inputEstado');
+
+    let selectedTickets = [];
+
+    // -----------------------------------------------------
+    // 1. GENERACIÓN DE BOLETOS
+    // -----------------------------------------------------
+    function initTickets() {
+        ticketContainer.innerHTML = '';
+        for (let i = 1; i <= totalTickets; i++) {
+            const btn = document.createElement('div');
+            btn.className = 'ticket-btn';
+            const ticketNum = i.toString().padStart(5, '0');
+            btn.innerText = ticketNum;
+            
+            if (Math.random() < 0.1) { 
+                btn.classList.add('sold');
+                btn.title = "Vendido";
+            } else {
+                btn.onclick = () => toggleTicket(btn, ticketNum);
+            }
+            
+            ticketContainer.appendChild(btn);
+        }
+    }
+
+    // 2. SELECCIONAR/DESELECCIONAR BOLETO
+    function toggleTicket(element, number) {
+        if (element.classList.contains('selected')) {
+            element.classList.remove('selected');
+            selectedTickets = selectedTickets.filter(t => t !== number);
+        } else {
+            selectedTickets.push(number);
+            element.classList.add('selected');
+        }
+        updateForm();
+    }
+
+    // 3. ACTUALIZAR FORMULARIO
+    function updateForm() {
+        selectedTickets.sort();
+        selectedCountSpan.innerText = selectedTickets.length;
+        if (selectedTickets.length > 0) {
+            purchaseForm.style.display = 'block';
+            purchaseForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+            purchaseForm.style.display = 'none';
+        }
+    }
+
+    // 4. MÁQUINA DE LA SUERTE
+    function seleccionarAleatorio(cantidad) {
+        // 1. Deseleccionar boletos previos
+        document.querySelectorAll('.ticket-btn.selected').forEach(b => b.classList.remove('selected'));
+        selectedTickets = [];
+        
+        const availableButtons = document.querySelectorAll('.ticket-btn:not(.sold)');
+        
+        if (availableButtons.length < cantidad) {
+            alert(`Solo quedan ${availableButtons.length} boletos disponibles. No se pueden seleccionar ${cantidad}.`);
+            return;
+        }
+
+        // 2. Seleccionar la cantidad de boletos al azar
+        const availableTickets = Array.from(availableButtons);
+        const selectedForMessage = [];
+
+        for(let i = 0; i < cantidad; i++) {
+            const randomIndex = Math.floor(Math.random() * availableTickets.length);
+            const randomBtn = availableTickets[randomIndex];
+            
+            // Simular el clic para seleccionar visualmente y añadir a selectedTickets
+            // NOTA: Usamos el método nativo click() para asegurar que toggleTicket haga el trabajo
+            randomBtn.click(); 
+            selectedForMessage.push(randomBtn.innerText); 
+
+            // Eliminar el boleto de la lista disponible para no seleccionarlo de nuevo
+            availableTickets.splice(randomIndex, 1);
+        }
+
+        // 3. Mostrar el anuncio con la lista de boletos
+        const listado = selectedForMessage.join(', ');
+        alert(`🍀 ¡La Máquina de la Suerte ha elegido ${cantidad} boletos para ti!\n\n${listado}\n\nAhora completa tus datos para apartarlos.`);
+        
+        // 4. Forzar la actualización del formulario y desplazamiento
+        updateForm(); 
+    }
+    
+    // 5. FUNCIÓN CLAVE: ENVIAR WHATSAPP (CON CÁLCULO DE PAGO)
+    function enviarWhatsApp() {
+        if (selectedTickets.length === 0) {
+            alert('Por favor, selecciona al menos un boleto.');
+            return;
+        }
+        
+        // **Cálculo del pago total**
+        const totalBoletos = selectedTickets.length;
+        const pagoTotal = totalBoletos * PRECIO_BOLETO;
+        const totalFormateado = pagoTotal.toFixed(2); // Formatea a 2 decimales para la moneda
+
+        const nombre = inputNombre.value.trim();
+        const whatsapp = inputWhatsapp.value.trim();
+        const estado = inputEstado.value;
+
+        // Validación de campos requeridos
+        if (nombre === '' || whatsapp === '') {
+            alert('Por favor, completa tu Nombre y WhatsApp para continuar con la reserva.');
+            if(nombre === '') inputNombre.focus();
+            else inputWhatsapp.focus();
+            return;
+        }
+        
+        if (estado === '') {
+            alert('Por favor, selecciona tu Estado para continuar con la reserva.');
+            inputEstado.focus();
+            return;
+        }
+
+        // Formatear la lista de boletos
+        const boletosTexto = selectedTickets.join(', ');
+
+        // Crear el mensaje automático
+        let mensaje = `*¡Hola! Quiero reservar los siguientes boletos:*\n\n`;
+        // Mensaje con el cálculo del total 💵
+        mensaje += `\uD83D\uDCB5 *PAGO TOTAL: $${totalFormateado}* (por ${totalBoletos} boletos)\n`; 
+       
+        mensaje += `\uD83C\uDFAB *Boletos Apartados*:\n${boletosTexto}\n\n`;
+        // Datos del cliente 👤
+        mensaje += `\uD83D\uDC64 *Datos del Cliente*:\n`;
+        mensaje += `Nombre: ${nombre}\n`;
+        mensaje += `WhatsApp: ${whatsapp}\n`;
+        mensaje += `Estado: ${estado}\n\n`;
+        mensaje += `*CUENTAS DE PAGO*:*https://rifassinaloa.github.io/Pagostrebolrifas.github.io/ siguiente paso es enviar captura del comprobante de pago para confirmar sus boletos.`;
+
+        // Codificar el mensaje para la URL
+        const mensajeCodificado = encodeURIComponent(mensaje);
+
+        // Crear el enlace de WhatsApp
+        const urlWhatsApp = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensajeCodificado}`;
+
+        // Abrir la ventana de WhatsApp
+        window.open(urlWhatsApp, '_blank');
+    }
+
+    // Iniciar
+    initTickets();
+</script>
+
+</body>
+</html>
